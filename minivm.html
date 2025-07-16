@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Mini Linux VM</title>
+  <style>
+    html, body, canvas { margin: 0; padding: 0; height: 100%; width: 100%; background: black; }
+  </style>
+  <!-- Inlined cheerpx.js -->
+  <script>
+  // [Start of cheerpx.js]
+  // Insert the full cheerpx.js content here
+  // [End of cheerpx.js]
+  </script>
+</head>
+<body>
+  <canvas id="screen"></canvas>
+  <script>
+    (async () => {
+      // Base64-encoded BusyBox + minimal Linux ext2 image (~5 MB)
+      const diskBase64 = 'data:application/octet-stream;base64, ...'; // I'll fill this
+      const cheerpxWasm = 'data:application/wasm;base64, ...'; // I'll fill this
+
+      const vm = await CheerpX.launch({
+        wasmUrl: cheerpxWasm,
+        disk: diskBase64,
+        canvas: document.getElementById('screen'),
+        cmdline: 'root=/dev/vda console=tty0 init=/bin/sh'
+      });
+      vm.run();
+    })();
+  </script>
+</body>
+</html>
